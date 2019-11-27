@@ -29,19 +29,9 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn> -->
 
-      <!-- Input de busca com auto complete -->
-      <v-autocomplete
-        v-model="select"
-        :loading="loading"
-        :items="items"
-        :search-input.sync="search"
-        cache-items
-        hide-no-data
-        hide-details
-        label="Pesquise aqui"
-        prepend-icon="mdi-magnify"
-      >
-      </v-autocomplete>
+      <!-- Input de busca com auto complete chamado da classe Search/search.vue -->
+      <search/>
+
     </div>
 
     <!-- TODO: menu de filtros -->
@@ -51,7 +41,12 @@
 
 <script>
 
+import Search from "../search/Search.vue"
+
 export default {
   name: 'AppHeader',
+  components: {
+    Search
+  }
 }
 </script>

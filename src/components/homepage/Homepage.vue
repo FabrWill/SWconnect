@@ -6,7 +6,7 @@
     <!-- conteudo do site -->
     <v-parallax class="parallax"
                 src="../../images/star_background.jpg"
-                max-height="572px">
+                max-height="580px">
 
         <v-container>
           <v-row
@@ -23,7 +23,7 @@
             <v-col cols="12">
               <p
                 align="center"
-                class="white--text pa-9 ma-9">
+                class="white--text pa-10 ma-10">
                 A um longo tempo atrás em uma galáxia muito, muito distante,
                 algumas pessoas confusas e vários planetas diferentes e diversos
                 personagems que... como era mesmo que ele era? Se essa é sua
@@ -37,8 +37,6 @@
 
         </v-container>
     </v-parallax>
-
-
 
   </div>
 </template>
@@ -65,6 +63,10 @@
 }
 
 .parallax {
-  height: 572px !important;
+  height: 580px !important;
+}
+
+.loading {
+  margin: 0px auto;
 }
 </style>
