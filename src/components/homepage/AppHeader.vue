@@ -30,7 +30,7 @@
       </v-btn> -->
 
       <!-- Input de busca com auto complete chamado da classe Search/search.vue -->
-      <search/>
+      <slot/>
 
     </div>
 
@@ -41,12 +41,8 @@
 
 <script>
 
-import search from "../search/Search.vue"
-
 export default {
   name: 'AppHeader',
-  components: {
-    search
-  }
+
 }
 </script>

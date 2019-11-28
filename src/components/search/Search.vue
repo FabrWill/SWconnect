@@ -3,8 +3,9 @@
 
     <!-- CAIXA DE PESQUISA DA APPHEADER -->
     <v-autocomplete
+    v-model="model"
     :items="results"
-    :loading="isLoading"
+    :search-input.sync="search"
     hide-no-data
     hide-selected
     return-object
@@ -12,7 +13,7 @@
     item-value="key"
     label="Type to Search"
     prepend-icon="mdi-magnify"
-    @input="search"
+    @change="onChange"
     >
     </v-autocomplete>
 
@@ -45,45 +46,25 @@
 
     data: () => ({
       results: [],
-      isLoading: false,
       model: "",
+      search: null,
     }),
 
-
     /*
-    * metodo - handleInput
-    * recebe o value de input para o funcionamento do search
+    * funcoes de loading
+    * envia para homepage o result pego na pesquisa
+    * remove o loading enviando os dados da pesquisa
     */
     methods: {
+      onChange(value) {
 
-      search (val) {
-        // Conserta erro de itens ja terem sido retornados
-        if (this.items.length > 0) return
+        if(this.items.length > 0 ){
 
-        // Conserta erro de itens estarem sendo carregados
-        if (this.isLoading) return
+          this.$emit('search', value)
+        }
 
-        this.isLoading = true
-
-
-        // carregamento dos items pela lib axios
-        // TODO: descobrir por que o ES6 n funciona aqui
-        axios.get('https://swapi.co/api/people/?search=' + val)
-              .then((res) => {
-
-                // res = res.json()
-
-                 this.count = res.data.count
-                 this.results = res.data.results
-
-              })
-              .catch(err => {
-                alert(err)
-              })
-             .finally(() => ( this.isLoading = false ))
-      },
+      }
     },
-
 
     /*
     * Metodo de formatacao dos objetos retornados pela api
@@ -103,6 +84,31 @@
       },
     },
 
+
+    watch: {
+      search (val) {
+        //conserta o erro de os dados ainda serem os mesmos
+        if (val == "") { this.items = {} }
+
+        // envia o evento para ocorrer o loading na homepage
+        this.$emit('loading', true)
+
+        // Conserta erro de itens ja terem sido retornados
+        if (this.items.length > 0) return
+
+        // carregamento dos items pela lib axios
+        axios.get('https://swapi.co/api/people/?search=' + val)
+              .then((res) => {
+
+                 this.count = res.data.count
+                 this.results = res.data.results
+
+              })
+              .catch(err => {
+                alert(err)
+              })
+      },
+    },
   }
 
   /*

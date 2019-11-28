@@ -1,10 +1,22 @@
 <template>
   <div>
     <!-- barra superior do site -->
-    <app-header/>
+    <app-header>
+      <search @search="onSearch" @loading="onLoading"/>
+    </app-header>
 
     <!-- conteudo do site -->
-    <v-parallax class="parallax"
+    <loading  :condition="searched"
+              v-if="isLoading">
+
+              <!-- Area do card do personagem -->
+
+
+    </loading>
+
+    <!-- TODO: passar isso para um componente estático -->
+    <v-parallax v-if="!isLoading"
+                class="parallax"
                 src="../../images/star_background.jpg"
                 max-height="600px">
 
@@ -43,14 +55,42 @@
 
 <script>
   import AppHeader from './AppHeader.vue'
+  import loading from '../loading/Loading.vue'
+  import search from '../search/Search.vue'
 
 
   export default {
     name: 'Homepage',
 
     components: {
-      AppHeader
+      AppHeader,
+      search,
+      loading
+    },
+
+    data: () => {
+      return {
+        isLoading: false,
+        searched: false
+      }
+    },
+
+    methods: {
+
+      onSearch (val) {
+
+        this.searched = true
+
+        alert(val)
+
+      },
+
+      onLoading () {
+
+        this.isLoading = true
+      }
     }
+
   }
 
 </script>
@@ -64,9 +104,5 @@
 
 .parallax {
   height: 600px !important;
-}
-
-.loading {
-  margin: 0px auto;
 }
 </style>
