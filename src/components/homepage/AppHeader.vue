@@ -41,12 +41,12 @@
 
 <script>
 
-import Search from "../search/Search.vue"
+import search from "../search/Search.vue"
 
 export default {
   name: 'AppHeader',
   components: {
-    Search
+    search
   }
 }
 </script>

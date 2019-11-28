@@ -6,7 +6,7 @@
     <!-- conteudo do site -->
     <v-parallax class="parallax"
                 src="../../images/star_background.jpg"
-                max-height="580px">
+                max-height="600px">
 
         <v-container>
           <v-row
@@ -63,7 +63,7 @@
 }
 
 .parallax {
-  height: 580px !important;
+  height: 600px !important;
 }
 
 .loading {

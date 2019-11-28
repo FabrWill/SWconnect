@@ -1,0 +1,30 @@
+{
+  "extends": [
+    "plugin:vue/components",
+    "@vue/airbnb"
+  ],
+  "overrides": [
+    {
+      "files": ["*.vue"],
+      "rules": {
+        "indent": "off"
+      }
+    }
+  ],
+  "rules": {
+    "no-console": "off",
+    "import/no-dynamic-require": 0,
+    "linebrak-style": 0,
+    "vue/html-indent": [2, 4],
+    "vue/script-indent": [2, 4, {
+        "baseIndent": 1
+      }],
+
+    "vue/singleline-html-element-content-newline": 0,
+    "vue/eqeqeq": 2,
+    "no-plusplus": 0,
+  },
+  "plugins": [
+    "html"
+  ]
+}
