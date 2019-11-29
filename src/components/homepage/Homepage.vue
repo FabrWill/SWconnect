@@ -10,68 +10,46 @@
               v-if="isLoading">
 
               <!-- Area do card do personagem -->
-
+              <characters :data="char"/>
 
     </loading>
 
-    <!-- TODO: passar isso para um componente estático -->
-    <v-parallax v-if="!isLoading"
-                class="parallax"
-                src="../../images/star_background.jpg"
-                max-height="600px">
+    <!-- TODO: arrumar erros de dinamismo -->
+    <start-info v-if="!isLoading"/>
 
-        <v-container>
-          <v-row
-            align="center"
-            justify="center">
-
-            <v-col cols="12">
-              <h4 class="title white--text yellow--text mt-9 pt-9"
-                  align="center">
-                  Connect
-              </h4>
-            </v-col>
-
-            <v-col cols="12">
-              <p
-                align="center"
-                class="white--text pa-10 ma-10">
-                A um longo tempo atrás em uma galáxia muito, muito distante,
-                algumas pessoas confusas e vários planetas diferentes e diversos
-                personagems que... como era mesmo que ele era? Se essa é sua
-                duvida, nós somos a solução basta pesquisar
-                acima para descobrir sobre seu personagem esquecido.
-              </p>
-
-
-            </v-col>
-          </v-row>
-
-        </v-container>
-    </v-parallax>
 
   </div>
 </template>
 
 <script>
-  import AppHeader from './AppHeader.vue'
+  import appHeader from './AppHeader.vue'
   import loading from '../loading/Loading.vue'
   import search from '../search/Search.vue'
+  import startInfo from './StartInfo.vue'
+
+  import characters from '../characters/Characters.vue'
+  import CharacterController from '../characters/CharactersController.js';
+
 
 
   export default {
     name: 'Homepage',
 
     components: {
-      AppHeader,
+      appHeader,
       search,
-      loading
+      loading,
+      startInfo,
+      characters
     },
+
+    mixins: [CharacterController],
 
     data: () => {
       return {
         isLoading: false,
-        searched: false
+        searched: false,
+        char: {}
       }
     },
 
@@ -79,9 +57,12 @@
 
       onSearch (val) {
 
-        this.searched = true
+        this.getCharacter(val, (char) => {
 
-        alert(val)
+          this.char = char
+
+          this.searched = true
+        })
 
       },
 
@@ -94,15 +75,3 @@
   }
 
 </script>
-
-<style scoped>
-
-.title {
-  font-family:"starwars", sans-serif !important;
-  font-size:60px !important;
-}
-
-.parallax {
-  height: 600px !important;
-}
-</style>

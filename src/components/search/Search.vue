@@ -23,26 +23,12 @@
 </template>
 
 
-<style scoped>
-
-  /*
-  * CONSERTA ERRO DE TAMANHO NA APP HEADER
-  */
-  .v-autocomplete {
-
-      height: 32px;
-
-  }
-
-</style>
-
-
 <script>
 
-  const axios = require('axios');
+
+  import CharacterController from '../characters/CharactersController.js';
 
   export default {
-
 
     data: () => ({
       results: [],
@@ -50,6 +36,7 @@
       search: null,
     }),
 
+    mixins: [CharacterController],
     /*
     * funcoes de loading
     * envia para homepage o result pego na pesquisa
@@ -97,16 +84,10 @@
         if (this.items.length > 0) return
 
         // carregamento dos items pela lib axios
-        axios.get('https://swapi.co/api/people/?search=' + val)
-              .then((res) => {
+        this.getAll("normal", val).then((result) => {
 
-                 this.count = res.data.count
-                 this.results = res.data.results
-
-              })
-              .catch(err => {
-                alert(err)
-              })
+          this.results = result
+        })
       },
     },
   }
@@ -122,3 +103,17 @@
   *
   */
 </script>
+
+
+<style scoped>
+
+  /*
+  * CONSERTA ERRO DE TAMANHO NA APP HEADER
+  */
+  .v-autocomplete {
+
+      height: 32px;
+
+  }
+
+</style>

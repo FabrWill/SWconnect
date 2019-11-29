@@ -1,27 +1,30 @@
 <!-- conteudo dinamico -->
-<div>
-  <v-containter>
-    <v-row>
-      <v-col cols="12">
+<template>
+      <v-col cols="10" class="mx-auto">
 
         <v-card class="ma-5 pa-5" >
           <p class="display-1 text--primary">
-            Luke Skywalker
+            {{ data.name }}
           </p>
           <v-row>
             <v-col>
-              <v-input class="ma-2" hint="height" persistent-hint>1.72m</v-input>
-              <v-input class="ma-2" hint="mass" persistent-hint>77kg</v-input>
+              <v-input class="ma-2 subtitle-2" hint="height" persistent-hint>{{ data.height }}m</v-input>
+              <v-input class="ma-2 subtitle-2" hint="mass" persistent-hint>{{ data.mass }}kg</v-input>
             </v-col>
             <v-col>
-              <v-input class="ma-2" hint="gender" persistent-hint>Masculino</v-input>
-              <v-input class="ma-2" hint="eye color" persistent-hint>Azul</v-input>
+              <v-input class="ma-2 subtitle-2" hint="gender" persistent-hint>{{ data.gender }}</v-input>
+              <v-input class="ma-2 subtitle-2" hint="eye color" persistent-hint>{{ data.eye_color }}</v-input>
             </v-col>
             <v-col cols="12">
               <div class="text--primary">
                 <b>Films</b>
               </div>
-              <v-banner>The Empire Strikes Back</v-banner>
+              <div v-for="(films, key) in data.films"
+                   v-bind:key="key">
+
+                  <v-banner class="subtitle-2">{{ films }}</v-banner>
+
+              </div>
             </v-col>
           </v-row>
 
@@ -29,8 +32,17 @@
         </v-card>
 
       </v-col>
-    </v-row>
 
-  </v-containter>
+</template>
 
-</div>
+
+<script>
+
+  export default {
+
+    props: ['data']
+
+  }
+
+
+</script>

@@ -7,7 +7,7 @@
                 color="primary mx-auto"
             />
         </div>
-        <div v-if="condition">
+        <div class="row" v-if="condition">
             <slot />
         </div>
       </v-row>
@@ -15,6 +15,8 @@
 </template>
 
 <script>
+
+
     export default {
         name: 'Loading',
         props: {
